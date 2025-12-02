@@ -18,7 +18,7 @@ try:
     upload_widget = widgets.FileUpload(
         accept='.jpg,.jpeg,.png,.bmp,.tiff',
         multiple=False,
-        description='📁 Seleccionar imagen'
+        description='Seleccionar imagen'
     )
 
     output_widget = widgets.Output()
@@ -38,7 +38,7 @@ try:
         val_test_transform = transform
         class_names = classes
         device = device_type
-        print("✅ Widget de predicción configurado correctamente!")
+        print("Widget de predicción configurado correctamente!")
 
     def predict_from_widget(change):
         """
@@ -50,7 +50,7 @@ try:
         if trained_model is None or val_test_transform is None or class_names is None:
             with output_widget:
                 print(
-                    "❌ Error: Widget no configurado. Ejecuta setup_widget_prediction() primero.")
+                    "Error: Widget no configurado. Ejecuta setup_widget_prediction() primero.")
             return
 
         if not upload_widget.value:
@@ -75,14 +75,14 @@ try:
                         file_bytes = file_info['content']
                         filename = file_info['name']
                     else:
-                        print("❌ No se pudo obtener la imagen subida")
+                        print("No se pudo obtener la imagen subida")
                         return
 
                 # Si 'content' es memoryview, convertir a bytes
                 if isinstance(file_bytes, memoryview):
                     file_bytes = file_bytes.tobytes()
 
-                print(f"🔍 Analizando imagen: {filename}")
+                print(f"Analizando imagen: {filename}")
                 print("-" * 50)
 
                 # Cargar imagen desde bytes
@@ -111,7 +111,7 @@ try:
                     predicted_class = predictions[0][0]
                     confidence = predictions[0][1]
 
-                print(f"✅ Predicción completada!")
+                print(f"Predicción completada!")
                 print(f"Clase predicha: {predicted_class}")
                 print(f"Confianza: {confidence:.2f}%")
 
@@ -157,15 +157,15 @@ try:
                 print("="*60)
 
                 for i, (class_name, probability) in enumerate(predictions):
-                    status = "⭐ PREDICCIÓN PRINCIPAL" if i == 0 else ""
+                    status = "PREDICCIÓN PRINCIPAL" if i == 0 else ""
                     print(
                         f"{i+1:2d}. {class_name:<15} {probability:6.2f}% {status}")
 
                 print("="*60)
-                print("✅ Análisis completado exitosamente!")
+                print("Análisis completado exitosamente!")
 
             except Exception as e:
-                print(f"❌ Error al procesar la imagen: {e}")
+                print(f"Error al procesar la imagen: {e}")
                 print("Verifica que el archivo sea una imagen válida (JPG, PNG, etc.)")
                 import traceback
                 traceback.print_exc()
@@ -175,10 +175,10 @@ try:
         Muestra el widget de predicción con instrucciones
         """
         if trained_model is None:
-            print("❌ Error: Primero configura el widget con setup_widget_prediction()")
+            print("Error: Primero configura el widget con setup_widget_prediction()")
             return
 
-        print("📋 Instrucciones:")
+        print("Instrucciones:")
         print("1. Haz clic en 'Seleccionar imagen' abajo")
         print("2. Selecciona una imagen desde tu computadora")
         print("3. La predicción se mostrará automáticamente")
@@ -192,17 +192,17 @@ try:
     upload_widget.observe(predict_from_widget, names='value')
 
 except ImportError as e:
-    print("❌ ipywidgets no está instalado.")
+    print("ipywidgets no está instalado.")
     print("Para usar esta funcionalidad, instala ipywidgets:")
     print("pip install ipywidgets")
     print("\nO usa las opciones 1 y 2 de arriba para predicciones sin widgets.")
 
     # Definir funciones dummy para evitar errores de importación
     def setup_widget_prediction(*args):
-        print("❌ ipywidgets no disponible")
+        print("ipywidgets no disponible")
 
     def display_prediction_widget():
-        print("❌ ipywidgets no disponible")
+        print("ipywidgets no disponible")
 
     upload_widget = None
     output_widget = None

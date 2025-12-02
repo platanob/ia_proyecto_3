@@ -101,7 +101,7 @@ def print_detailed_prediction(predictions, image_path, top_k=5):
 
     display_predictions = predictions[:top_k]
     for i, (class_name, probability) in enumerate(display_predictions):
-        status = "⭐ PREDICCION PRINCIPAL" if i == 0 else ""
+        status = "*PREDICCION PRINCIPAL" if i == 0 else ""
         print(f"{i+1:2d}. {class_name:<15} {probability:6.2f}% {status}")
 
     print("="*70)
@@ -154,7 +154,7 @@ def predict_random_from_test(model, test_dataset_path, class_names, transform, d
                 f"Prediccion: {predicted_class} (Confianza: {confidence:.2f}%)")
 
             # Verificar si la prediccion es correcta
-            is_correct = "✅ CORRECTA" if predicted_class == real_class else "❌ INCORRECTA"
+            is_correct = "CORRECTA" if predicted_class == real_class else "INCORRECTA"
             print(f"Resultado: {is_correct}")
 
             visualize_prediction_result(

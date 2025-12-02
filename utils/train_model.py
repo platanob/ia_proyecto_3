@@ -107,7 +107,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
             patience_counter = 0
             best_epoch = epoch + 1
             print(
-                f"🌟 Nuevo mejor modelo! Val Loss: {best_val_loss:.4f}, Val Acc: {epoch_val_accuracy:.2f}%")
+                f"Nuevo mejor modelo Val Loss: {best_val_loss:.4f}, Val Acc: {epoch_val_accuracy:.2f}%")
         else:
             patience_counter += 1
             print(f"Sin mejora. Paciencia: {patience_counter}/{patience}")
@@ -122,7 +122,7 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
     model.load_state_dict(best_model_state)
     total_time = time.time() - start_time
 
-    print(f"\n🎉 Entrenamiento completado!")
+    print(f"\nEntrenamiento completado!")
     print(f"Tiempo total: {total_time/60:.2f} minutos")
     print(f"Mejor epoch: {best_epoch}")
     print(f"Mejor validation loss: {best_val_loss:.4f}")
@@ -180,21 +180,21 @@ def plot_training_metrics(train_losses, val_losses, train_accuracies, val_accura
     plt.show()
 
     # Estadísticas finales
-    print("📊 RESUMEN DE MÉTRICAS:")
+    print("RESUMEN DE MÉTRICAS:")
     print("="*60)
-    print(f"📈 LOSS:")
+    print(f"LOSS:")
     print(f"  • Final training loss:     {train_losses[-1]:.4f}")
     print(f"  • Final validation loss:   {val_losses[-1]:.4f}")
     print(
         f"  • Best validation loss:    {min(val_losses):.4f} (epoch {val_losses.index(min(val_losses)) + 1})")
-    print(f"📊 ACCURACY:")
+    print(f"ACCURACY:")
     print(f"  • Final training accuracy:     {train_accuracies[-1]:.2f}%")
     print(f"  • Final validation accuracy:   {val_accuracies[-1]:.2f}%")
     print(
         f"  • Best validation accuracy:    {max(val_accuracies):.2f}% (epoch {val_accuracies.index(max(val_accuracies)) + 1})")
 
     if best_epoch:
-        print(f"⭐ MEJOR MODELO (Epoch {best_epoch}):")
+        print(f"MEJOR MODELO (Epoch {best_epoch}):")
         print(f"  • Validation loss:     {val_losses[best_epoch-1]:.4f}")
         print(f"  • Validation accuracy: {val_accuracies[best_epoch-1]:.2f}%")
     print("="*60)
